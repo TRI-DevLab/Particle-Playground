@@ -1,0 +1,48 @@
+# The main file where the program meets all the ideas and runs everything.
+
+import pygame 
+import config
+from sys import exit
+
+
+
+
+def main():
+    pygame.init()           # Initiate Pygame 
+
+
+    screen = pygame.display.set_mode(
+        (config.WINDOW_WIDTH, config.WINDOW_HEIGHT)
+    )
+
+    pygame.display.set_caption(config.WINDOW_TITLE)
+
+    clock = pygame.time.Clock()
+
+    running = True
+
+    while running:
+
+        clock.tick(config.FPS)
+
+        # Event handling 
+        for event in pygame.event.get():
+
+            # Exiting the Program 
+            if event.type == pygame.QUIT:
+                running = False
+
+
+        # Rendering 
+        screen.fill(config.BACKGROUND_COLOR)
+
+        pygame.display.flip()               # Update constantly 
+
+
+    pygame.quit()
+    exit()
+
+
+if __name__ == "__main__":
+    main()
+
