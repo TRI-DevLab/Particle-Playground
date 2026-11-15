@@ -4,6 +4,7 @@ import pygame
 import config
 from sys import exit
 from particle import Particle
+from simulation import Simulation
 
 
 
@@ -20,8 +21,14 @@ def main():
 
     clock = pygame.time.Clock()
 
-    # Create a Particle 
-    particle = Particle(500, 250)
+    simulation = Simulation()
+
+
+    # Create a some particles 
+    simulation.add_particle(500, 250)
+    simulation.add_particle(600, 100)
+    simulation.add_particle(400, 125)
+    simulation.add_particle(100, 350)
 
     running = True
 
@@ -40,14 +47,10 @@ def main():
         # Rendering 
         screen.fill(config.BACKGROUND_COLOR)
 
-        particle.update()                   # This changes the particles positioning in real time 
+        # This changes the particles positioning in real time and establishes walls for each particle
+        simulation.update(config.WINDOW_WIDTH, config.WINDOW_HEIGHT)
 
-        particle.wall_collision(            # This is to establish the walls for the screen
-            config.WINDOW_WIDTH,
-            config.WINDOW_HEIGHT
-        )
-
-        particle.draw(screen)
+        simulation.draw(screen)
 
         pygame.display.flip()               # Update constantly 
 
