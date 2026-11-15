@@ -41,6 +41,12 @@ def main():
         screen.fill(config.BACKGROUND_COLOR)
 
         particle.update()                   # This changes the particles positioning in real time 
+
+        particle.wall_collision(            # This is to establish the walls for the screen
+            config.WINDOW_WIDTH,
+            config.WINDOW_HEIGHT
+        )
+
         particle.draw(screen)
 
         pygame.display.flip()               # Update constantly 

@@ -45,4 +45,25 @@ class Particle:
         # position is updated by the added uniform velocity
         self.x += self.vx
         self.y += self.vy
-    
+
+    def wall_collision(self, width, height):
+
+        # Top wall 
+        if self.y - self.radius <= 0:
+            self.y = self.radius
+            self.vy *= -1               # changes velocity in opposite direction to simulate bounce
+
+        # Bottom wall
+        elif self.y + self.radius >= height:
+            self.y = height - self.radius
+            self.vy *= -1
+
+
+        # Left wall 
+        if self.x - self.radius <= 0:
+            self.x = self.radius
+            self.vx *= -1
+
+        elif self.x + self.radius >= width:
+            self.x = width - self.radius
+            self.vx *= -1
