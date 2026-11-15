@@ -2,7 +2,6 @@
 
 import pygame 
 import random 
-import config
 
 
 class Particle:
@@ -13,20 +12,37 @@ class Particle:
         self.y = y
 
         # Velocity
-        self.vx = 2
-        self.vy = 2
+        self.vx = random.uniform(-3, -3)            
+        self.vy = random.uniform(-3, -3)
 
         # Appearance
-        self.radius = 5
+        self.radius = random.randint(3, 8)
 
-        self.color = config.PARTICLE_DEFAULT_COLOR
+        self.color = (
+            random.randint(80, 255),
+            random.randint(80, 255),
+            random.randint(80, 255)
+        )
 
 
     def draw(self, screen):
+        # integer coordinates for the center
+        center = (int(self.x), int(self.y))
+
         pygame.draw.circle(
             screen,
             self.color,
-            (int(self.x), int(self.y)),
+            center,
             self.radius
         )
+
+    def update(self):
+
+        gravity = 0.10      # This affects vertical velocity
+
+        self.vy += gravity      # gravity is added to the velocity 
+
+        # position is updated by the added uniform velocity
+        self.x += self.vx
+        self.y += self.vy
     

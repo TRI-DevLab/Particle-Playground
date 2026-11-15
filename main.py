@@ -40,6 +40,7 @@ def main():
         # Rendering 
         screen.fill(config.BACKGROUND_COLOR)
 
+        particle.update()                   # This changes the particles positioning in real time 
         particle.draw(screen)
 
         pygame.display.flip()               # Update constantly 
