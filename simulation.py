@@ -29,3 +29,35 @@ class Simulation:
 
             # Establishes walls for the particle
             particle.wall_collision(width, height)
+
+    def remove_particle(self, x, y):
+
+        # if there are not particles account for that
+        if not self.particles:
+            return 
+
+        # Going to remove the closest particle to the pointer
+
+        # initial particle and distance
+        nearest_particle = self.particles[0]
+        min_dist_sq = (nearest_particle.x - x) ** 2 + (nearest_particle.y - y) ** 2
+
+        # Iterate from second particle
+        for particle in self.particles[1:]:
+            dist_sq = (particle.x - x) ** 2 + (particle.y - y) ** 2
+            # check which is smaller
+            if dist_sq < min_dist_sq:
+                min_dist_sq = dist_sq           # if distance is smaller assign it to min variable 
+                nearest_particle = particle     # assign it to the min variable
+
+
+        # remove the closest distance
+        self.particles.remove(nearest_particle)
+
+
+
+    
+    def clear(self):
+
+        # removes all particles
+        self.particles.clear()

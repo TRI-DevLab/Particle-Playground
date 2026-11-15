@@ -47,12 +47,25 @@ def main():
             if event.type == pygame.QUIT:
                 running = False
 
+            # Mouse 
             elif event.type == pygame.MOUSEBUTTONDOWN:
 
-                # Adding particles with mouse leftclick
+                # Adding particles with mouse left click
                 if event.button == 1:
                     x, y = event.pos        
                     simulation.add_particle(x, y)
+
+                # Remove nearest particles with mouse right click
+                elif event.button == 3:
+                    x, y = event.pos
+                    simulation.remove_particle(x, y)
+
+            # Keyboards
+            elif event.type == pygame.KEYDOWN:
+
+                # Clears the screen (R key)
+                if event.key == pygame.K_r:
+                    simulation.clear()
 
         # Rendering 
         screen.fill(config.BACKGROUND_COLOR)
