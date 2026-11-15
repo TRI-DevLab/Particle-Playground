@@ -1,6 +1,7 @@
 # This file manges a the particles and how they interact with the screen it manages how a bunch of them are created, stored and updated.
 
 from particle import Particle 
+import config
 
 
 class Simulation:
@@ -62,7 +63,7 @@ class Simulation:
 
     def attract_particles(self, mouse_x, mouse_y):
 
-        strength = 0.05
+        strength = config.ATTRACTION_STRENGTH
 
         # for each particle
         for particle in self.particles:

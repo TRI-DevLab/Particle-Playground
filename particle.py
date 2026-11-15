@@ -2,6 +2,7 @@
 
 import pygame 
 import random 
+import config
 
 
 class Particle:
@@ -38,7 +39,7 @@ class Particle:
 
     def update(self):
 
-        gravity = 0.10      # This affects vertical velocity
+        gravity = config.GRAVITY       # This affects vertical velocity
 
         self.vy += gravity      # gravity is added to the velocity 
 

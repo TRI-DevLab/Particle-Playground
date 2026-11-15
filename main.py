@@ -6,7 +6,7 @@ from sys import exit
 from particle import Particle
 from simulation import Simulation
 import random
-
+from controls import ControlPanel
 
 
 
@@ -23,6 +23,8 @@ def main():
     clock = pygame.time.Clock()
 
     simulation = Simulation()
+
+    control_panel = ControlPanel(screen)
 
 
     # Create a some particles 
@@ -86,9 +88,17 @@ def main():
         # This changes the particles positioning in real time & establishes the walls for each particle only when in play
         if not paused:
             # This changes the particles positioning in real time and establishes walls for each particle
-            simulation.update(config.WINDOW_WIDTH, config.WINDOW_HEIGHT)
+            simulation.update(
+                config.WINDOW_WIDTH - config.PANEL_WIDTH,
+                config.WINDOW_HEIGHT
+            )
 
         simulation.draw(screen)
+
+        control_panel.draw(
+            config.INITIAL_PARTICLES,
+            paused
+        )
 
         pygame.display.flip()               # Update constantly 
 
