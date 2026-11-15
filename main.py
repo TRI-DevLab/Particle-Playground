@@ -34,6 +34,7 @@ def main():
             random.randint(100, 500)
         )
 
+    paused = False              # For pause & play of particles 
     running = True
 
     while running:
@@ -67,11 +68,25 @@ def main():
                 if event.key == pygame.K_r:
                     simulation.clear()
 
+                # Pause / Play Particle movement (Space)
+                elif event.key == pygame.K_SPACE:
+                    paused = not paused
+
+
+            # Mouse held down 
+            if pygame.mouse.get_pressed()[0] and not paused:
+                # get mouse position
+                mouse_x, mouse_y = pygame.mouse.get_pos()
+
+                simulation.attract_particles(mouse_x, mouse_y)
+
         # Rendering 
         screen.fill(config.BACKGROUND_COLOR)
 
-        # This changes the particles positioning in real time and establishes walls for each particle
-        simulation.update(config.WINDOW_WIDTH, config.WINDOW_HEIGHT)
+        # This changes the particles positioning in real time & establishes the walls for each particle only when in play
+        if not paused:
+            # This changes the particles positioning in real time and establishes walls for each particle
+            simulation.update(config.WINDOW_WIDTH, config.WINDOW_HEIGHT)
 
         simulation.draw(screen)
 

@@ -54,10 +54,23 @@ class Simulation:
         # remove the closest distance
         self.particles.remove(nearest_particle)
 
-
-
     
     def clear(self):
 
         # removes all particles
         self.particles.clear()
+
+    def attract_particles(self, mouse_x, mouse_y):
+
+        strength = 0.05
+
+        # for each particle
+        for particle in self.particles:
+
+            # get distance between particle and mouse
+            dx = mouse_x - particle.x
+            dy = mouse_y - particle.y
+
+            # update the velocity to to move towards the distance by the strength
+            particle.vx += dx * strength
+            particle.vy += dy * strength
