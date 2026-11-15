@@ -3,6 +3,7 @@
 import pygame 
 import config
 from sys import exit
+from particle import Particle
 
 
 
@@ -18,6 +19,9 @@ def main():
     pygame.display.set_caption(config.WINDOW_TITLE)
 
     clock = pygame.time.Clock()
+
+    # Create a Particle 
+    particle = Particle(500, 250)
 
     running = True
 
@@ -35,6 +39,8 @@ def main():
 
         # Rendering 
         screen.fill(config.BACKGROUND_COLOR)
+
+        particle.draw(screen)
 
         pygame.display.flip()               # Update constantly 
 

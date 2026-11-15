@@ -10,4 +10,5 @@ WINDOW_TITLE = "Particle Playground"
 FPS = 60
 
 # Colors 
-BACKGROUND_COLOR = (18, 18, 28)         # Navy Blue 
+BACKGROUND_COLOR = (18, 18, 28)             # Navy Blue 
+PARTICLE_DEFAULT_COLOR = (100, 200, 255)    # Light Blue 
