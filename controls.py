@@ -22,6 +22,9 @@ class ControlPanel:
 
     def draw(self, particle_count, paused):
 
+        # Adjustment for Control Panel
+        panel_x = self.panel_rect.x + 20 
+
         # Draw the panel
         pygame.draw.rect(
             self.screen,
@@ -36,6 +39,30 @@ class ControlPanel:
             config.WHITE
         )
 
-        self.screen.blit(title, (870, 30))
+        self.screen.blit(title, (panel_x, 30))
+
+        # Count Text
+        count_text = self.small_font.render(
+            f"Particles: {particle_count}",
+            True, 
+            config.MUTED_COLOR
+        )
+
+        self.screen.blit(count_text, (panel_x, 80))
+
+        # Status
+        if paused:
+            status = "PAUSED"
+        else:
+            status = "RUNNING"
+
+        status_text = self.small_font.render(
+            status,
+            True,
+            config.ACCENT_COLOR
+        )
+
+        self.screen.blit(status_text, (panel_x, 110))
+        
 
 

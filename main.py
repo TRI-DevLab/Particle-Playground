@@ -30,7 +30,7 @@ def main():
     # Create a some particles 
 
 
-    for _ in range(50):
+    for _ in range(config.INITIAL_PARTICLES):
         simulation.add_particle(
             random.randint(100, 1000), 
             random.randint(100, 500)
@@ -96,7 +96,7 @@ def main():
         simulation.draw(screen)
 
         control_panel.draw(
-            config.INITIAL_PARTICLES,
+            len(simulation.particles),      # number of particles
             paused
         )
 
