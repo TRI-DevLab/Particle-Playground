@@ -5,6 +5,7 @@ import config
 from sys import exit
 from particle import Particle
 from simulation import Simulation
+import random
 
 
 
@@ -25,10 +26,13 @@ def main():
 
 
     # Create a some particles 
-    simulation.add_particle(500, 250)
-    simulation.add_particle(600, 100)
-    simulation.add_particle(400, 125)
-    simulation.add_particle(100, 350)
+
+
+    for _ in range(50):
+        simulation.add_particle(
+            random.randint(100, 1000), 
+            random.randint(100, 500)
+        )
 
     running = True
 
@@ -43,6 +47,12 @@ def main():
             if event.type == pygame.QUIT:
                 running = False
 
+            elif event.type == pygame.MOUSEBUTTONDOWN:
+
+                # Adding particles with mouse leftclick
+                if event.button == 1:
+                    x, y = event.pos        
+                    simulation.add_particle(x, y)
 
         # Rendering 
         screen.fill(config.BACKGROUND_COLOR)
