@@ -27,18 +27,48 @@ class Particle:
         # Trail
         self.trail = deque(maxlen=15)
 
+        # LifeSpan
+        self.max_lifespan = 600
+        self.lifespan = self.max_lifespan                 # changes   
+
 
     def draw(self, screen):
-        # integer coordinates for the center
-        center = (int(self.x), int(self.y))
+
+        # calculate alpha transparency 
+        # alpha = max(0, min(225, int(255 * (self.lifespan / self.max_lifespan)) ))
+
+        # creates transparent surface 
+        #particle_surface = pygame.Surface(
+            #(self.radius * 2, self.radius * 2),
+            #pygame.SRCALPHA
+        #)
+
+        # Draw particle with alpha 
+        # particle_color = (*self.color, alpha)
+
+        #pygame.draw.circle(
+            #particle_surface,
+            #particle_color,
+            #(self.radius, self.radius),
+            #self.radius
+        #)
+
+
+        # Display particle surface
+        #screen.blit(
+            #particle_surface,
+            #(int(self.x - self.radius), int(self.y - self.radius))
+        #)
+
+
+        # life_ratio = max(0, self.lifespan / self.max_lifespan)
 
         pygame.draw.circle(
-            screen,
+            screen, 
             self.color,
-            center,
+            (int(self.x), int(self.y)),
             self.radius
         )
-
 
 
         # Draw Trail
@@ -85,6 +115,9 @@ class Particle:
 
         # Record current position
         self.trail.append((self.x, self.y))
+
+        # Reduce lifespan
+        self.lifespan -= 1
 
     def wall_collision(self, width, height):
 
