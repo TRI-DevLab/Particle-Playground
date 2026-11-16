@@ -36,3 +36,27 @@ As I grow as a programmer, my understanding of the fundamentals principles of ma
 | `R` | Reset Simulation
 
 
+
+## How to Run
+
+### Prerequisites
+- Python 3.8+ installed
+
+### Installation and Lunch
+1. Clone Repository
+```bash
+git clone https://github.com/TRI-DevLab/Particle-Playground.git
+
+```
+
+2. Install Pygame
+```bash
+pip install pygame
+
+```
+
+3. Run Visualizer
+```bash
+python main.py
+
+```
