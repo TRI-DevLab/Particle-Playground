@@ -2,6 +2,7 @@
 
 import pygame
 import config
+from slider import Slider
 
 class ControlPanel:
 
@@ -10,7 +11,7 @@ class ControlPanel:
         self.screen = screen
 
         self.font = pygame.font.SysFont("Arial", 22)
-        self.small_font = pygame.font.SysFont("Ariel", 16)
+        self.small_font = pygame.font.SysFont("Arial", 16)
 
         # Set the dimensions of the panel
         self.panel_rect = pygame.Rect(
@@ -18,6 +19,28 @@ class ControlPanel:
             0,
             config.PANEL_WIDTH,
             config.WINDOW_HEIGHT 
+        )
+
+        # Create Gravity slider
+        self.gravity_slider = Slider(
+            x = self.panel_rect.x + 20,
+            y = 220,
+            width = 190, 
+            min_value = 0.0,
+            max_value = 0.25,
+            initial_value = 0.1,
+            label = "Gravity"
+        )
+
+        # Create Attraction Slider
+        self.attraction_slider = Slider(
+            x = self.panel_rect.x + 20,
+            y = 320,
+            width = 190,
+            min_value = 0.0,
+            max_value = 0.2,
+            initial_value = 0.05,
+            label = "Attraction"
         )
 
     def draw(self, particle_count, paused):
@@ -63,6 +86,14 @@ class ControlPanel:
         )
 
         self.screen.blit(status_text, (panel_x, 110))
-        
 
+        # Draw Gravity Slider
+        self.gravity_slider.draw(self.screen)
 
+        # Draw Attention Slider
+        self.attraction_slider.draw(self.screen)
+
+    def handle_event(self, event):
+
+        self.gravity_slider.handle_event(event)
+        self.attraction_slider.handle_event(event)
