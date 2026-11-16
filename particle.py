@@ -2,8 +2,7 @@
 
 import pygame 
 import random 
-import config
-
+from collections import deque
 
 class Particle:
     def __init__(self, x, y):
@@ -25,6 +24,9 @@ class Particle:
             random.randint(80, 255)
         )
 
+        # Trail
+        self.trail = deque(maxlen=15)
+
 
     def draw(self, screen):
         # integer coordinates for the center
@@ -37,6 +39,42 @@ class Particle:
             self.radius
         )
 
+
+
+        # Draw Trail
+
+        positions = list(self.trail)
+
+        for i in range(1, len(positions)):
+
+            start = positions[i - 1]
+            end = positions[i]
+
+            # calculate fading intensity 
+            intensity = i / len(positions)
+
+            # Draw trail segment 
+            trail_color = []
+
+            # each iteration the color gets dimmed 
+            for channel in self.color:
+                dimmed_channel = int(channel * intensity)
+                trail_color.append(dimmed_channel)
+
+            # from list to tuple
+            trail_color = tuple(trail_color)
+
+            pygame.draw.line(
+                screen,
+                trail_color,
+                (int(start[0]), int(start[1])),
+                (int(end[0]), int(end[1])),
+                max(1, int(self.radius * intensity))
+            )
+
+        
+
+
     def update(self, gravity):
 
         self.vy += gravity      # gravity is added to the velocity 
@@ -44,6 +82,9 @@ class Particle:
         # position is updated by the added uniform velocity
         self.x += self.vx
         self.y += self.vy
+
+        # Record current position
+        self.trail.append((self.x, self.y))
 
     def wall_collision(self, width, height):
 
