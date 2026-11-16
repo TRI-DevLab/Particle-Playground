@@ -13,8 +13,8 @@ class Particle:
         self.y = y
 
         # Velocity
-        self.vx = random.uniform(-3, -3)            
-        self.vy = random.uniform(-3, -3)
+        self.vx = random.uniform(-3, 3)            
+        self.vy = random.uniform(-3, 3)
 
         # Appearance
         self.radius = random.randint(3, 8)
@@ -37,9 +37,7 @@ class Particle:
             self.radius
         )
 
-    def update(self):
-
-        gravity = config.GRAVITY       # This affects vertical velocity
+    def update(self, gravity):
 
         self.vy += gravity      # gravity is added to the velocity 
 

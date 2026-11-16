@@ -9,6 +9,9 @@ class Simulation:
     def __init__(self):
         self.particles = []     # This will hold a list of particle functions
 
+        self.gravity = config.GRAVITY
+        self.strength = config.ATTRACTION_STRENGTH
+
 
     def add_particle(self, x, y):
 
@@ -26,7 +29,7 @@ class Simulation:
 
         # Updates multiple particles in real time
         for particle in self.particles:
-            particle.update()
+            particle.update(self.gravity)
 
             # Establishes walls for the particle
             particle.wall_collision(width, height)
@@ -73,5 +76,5 @@ class Simulation:
             dy = mouse_y - particle.y
 
             # update the velocity to to move towards the distance by the strength
-            particle.vx += dx * strength
-            particle.vy += dy * strength
+            particle.vx += dx * self.strength
+            particle.vy += dy * self.strength

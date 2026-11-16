@@ -46,6 +46,8 @@ def main():
         # Event handling 
         for event in pygame.event.get():
 
+            control_panel.handle_event(event)
+
             # Exiting the Program 
             if event.type == pygame.QUIT:
                 running = False
@@ -87,6 +89,13 @@ def main():
 
         # This changes the particles positioning in real time & establishes the walls for each particle only when in play
         if not paused:
+
+            # Sync Physics settings with sliders
+            simulation.gravity = control_panel.gravity_slider.value
+
+            simulation.strength = control_panel.attraction_slider.value
+
+
             # This changes the particles positioning in real time and establishes walls for each particle
             simulation.update(
                 config.WINDOW_WIDTH - config.PANEL_WIDTH,
